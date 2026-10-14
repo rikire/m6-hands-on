@@ -29,6 +29,11 @@ public class StubEmbedder implements Embedder {
         return v;
     }
 
+    @Override
+    public String modelId() {
+        return "stub-hash-" + DIM;
+    }
+
     /** Cosine similarity helper -- callers may use this from RagAssistant.retrieve. */
     public static float cosine(float[] a, float[] b) {
         if (a.length != b.length) {
