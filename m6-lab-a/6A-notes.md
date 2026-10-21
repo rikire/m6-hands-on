@@ -4,6 +4,12 @@ Setup: embedder `all-MiniLM-L6-v2` (langchain4j 0.36.0, local ONNX), LLM
 `llama3.2:3b` via Ollama (temperature 0), top-k = 8, corpus `sample-repo/`
 (8 `.java` files).  Raw logs are in `runs/`.
 
+**Build:** `src/` uses the real embedder and LLM, so run `make langchain4j`
+(needs Maven) before `make test` / `make run`; without it the build fails
+on the langchain4j imports.  `make run` also needs Ollama with
+`llama3.2:3b` (`SKIP_LLM=1` for retrieval only, `LLM=stub EMBEDDER=stub`
+for fully offline).
+
 | Log | What it is |
 |---|---|
 | `runs/starter-stub.txt` | starter code (`main`), stub chunker + stubs, task 3 "before" |
