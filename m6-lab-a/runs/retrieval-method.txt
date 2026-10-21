@@ -1,0 +1,126 @@
+javac --release 17 -d build -cp libs/junit.jar:libs/langchain4j/langchain4j-core-0.36.0.jar:libs/langchain4j/okhttp-4.12.0.jar:libs/langchain4j/tokenizers-0.30.0.jar:libs/langchain4j/jackson-databind-2.16.1.jar:libs/langchain4j/okio-3.6.0.jar:libs/langchain4j/slf4j-api-2.0.16.jar:libs/langchain4j/okio-jvm-3.6.0.jar:libs/langchain4j/commons-codec-1.17.1.jar:libs/langchain4j/commons-compress-1.27.1.jar:libs/langchain4j/annotations-13.0.jar:libs/langchain4j/commons-io-2.16.1.jar:libs/langchain4j/gson-2.10.1.jar:libs/langchain4j/jna-5.14.0.jar:libs/langchain4j/retrofit-2.9.0.jar:libs/langchain4j/jackson-annotations-2.16.1.jar:libs/langchain4j/langchain4j-embeddings-all-minilm-l6-v2-0.36.0.jar:libs/langchain4j/langchain4j-0.36.0.jar:libs/langchain4j/api-0.30.0.jar:libs/langchain4j/langchain4j-embeddings-0.36.0.jar:libs/langchain4j/langchain4j-ollama-0.36.0.jar:libs/langchain4j/kotlin-stdlib-1.9.10.jar:libs/langchain4j/opennlp-tools-1.9.4.jar:libs/langchain4j/converter-jackson-2.9.0.jar:libs/langchain4j/kotlin-stdlib-jdk8-1.9.10.jar:libs/langchain4j/kotlin-stdlib-common-1.9.10.jar:libs/langchain4j/jackson-core-2.16.1.jar:libs/langchain4j/kotlin-stdlib-jdk7-1.9.10.jar:libs/langchain4j/commons-lang3-3.16.0.jar:libs/langchain4j/onnxruntime-1.20.0.jar:build src/MiniLmEmbedder.java src/OllamaLlm.java src/LlmClient.java src/Chunk.java src/Main.java src/RagAssistant.java src/Embedder.java src/RepoIndexer.java src/StubLlmClient.java src/StubEmbedder.java test/ChunkerTest.java test/RagAssistantTest.java test/RepoIndexerTest.java
+embedder=all-MiniLM-L6-v2@langchain4j-0.36.0 llm=(skipped) chunker=method
+Indexed 51 chunk(s) from sample-repo in 540 ms
+
+=== Q: Where is the fine for an overdue loan computed?
+  hit: sample-repo/com/example/util/FinePolicy.java:9-20
+  hit: sample-repo/com/example/core/Loan.java:45-54
+  hit: sample-repo/com/example/core/LoanRegistry.java:34-42
+  hit: sample-repo/com/example/api/ReportService.java:28-30
+  hit: sample-repo/com/example/api/LibraryService.java:43-45
+  hit: sample-repo/com/example/util/FinePolicy.java:27-36   <- right chunk
+  hit: sample-repo/com/example/core/Loan.java:33-35
+  hit: sample-repo/com/example/core/Loan.java:37-39
+  right chunk in top-8: yes (rank 6)
+
+=== Q: What class holds the catalogue of books, and how is it indexed?
+  hit: sample-repo/com/example/util/Catalog.java:11-55   <- right chunk
+  hit: sample-repo/com/example/core/Book.java:6-66
+  hit: sample-repo/com/example/util/Catalog.java:23-25
+  hit: sample-repo/com/example/api/LibraryService.java:47-49
+  hit: sample-repo/com/example/util/Catalog.java:19-21
+  hit: sample-repo/com/example/core/Book.java:27-29
+  hit: sample-repo/com/example/util/Catalog.java:27-40
+  hit: sample-repo/com/example/api/LibraryService.java:30-41
+  right chunk in top-8: yes (rank 1)
+
+=== Q: How does the system decide a loan has been returned?
+  hit: sample-repo/com/example/core/Loan.java:45-54   <- right chunk
+  hit: sample-repo/com/example/core/Loan.java:37-39
+  hit: sample-repo/com/example/core/Loan.java:6-55
+  hit: sample-repo/com/example/core/Loan.java:33-35
+  hit: sample-repo/com/example/core/LoanRegistry.java:24-32
+  hit: sample-repo/com/example/core/LoanRegistry.java:8-43
+  hit: sample-repo/com/example/core/LoanRegistry.java:34-42
+  hit: sample-repo/com/example/core/LoanRegistry.java:16-18
+  right chunk in top-8: yes (rank 1)
+
+=== Q: What is the maximum fine the policy allows?
+  hit: sample-repo/com/example/util/FinePolicy.java:9-20
+  hit: sample-repo/com/example/util/FinePolicy.java:27-36
+  hit: sample-repo/com/example/util/FinePolicy.java:22-37   <- right chunk
+  hit: sample-repo/com/example/api/LibraryService.java:43-45
+  hit: sample-repo/com/example/core/Member.java:41-49
+  hit: sample-repo/com/example/util/FinePolicy.java:17-19
+  hit: sample-repo/com/example/api/LibraryService.java:24-28
+  hit: sample-repo/com/example/core/Loan.java:6-55
+  right chunk in top-8: yes (rank 3)
+
+=== Q: Which methods write to the loan registry?
+  hit: sample-repo/com/example/core/LoanRegistry.java:8-43
+  hit: sample-repo/com/example/core/LoanRegistry.java:16-18   <- right chunk
+  hit: sample-repo/com/example/api/ReportService.java:11-44
+  hit: sample-repo/com/example/core/LoanRegistry.java:34-42
+  hit: sample-repo/com/example/core/LoanRegistry.java:24-32
+  hit: sample-repo/com/example/core/Loan.java:6-55
+  hit: sample-repo/com/example/core/Loan.java:45-54
+  hit: sample-repo/com/example/core/LoanRegistry.java:20-22
+  right chunk in top-8: yes (rank 2)
+
+=== Q: How many books can a member have on loan at the same time?
+  hit: sample-repo/com/example/core/Loan.java:6-55
+  hit: sample-repo/com/example/core/Member.java:41-49   <- right chunk
+  hit: sample-repo/com/example/core/Book.java:6-66
+  hit: sample-repo/com/example/core/Loan.java:19-23
+  hit: sample-repo/com/example/api/LibraryService.java:30-41
+  hit: sample-repo/com/example/api/ReportService.java:32-43
+  hit: sample-repo/com/example/core/Loan.java:25-27
+  hit: sample-repo/com/example/core/LoanRegistry.java:24-32
+  right chunk in top-8: yes (rank 2)
+
+=== Q: How many days is the standard loan term?
+  hit: sample-repo/com/example/core/Loan.java:45-54
+  hit: sample-repo/com/example/core/Loan.java:6-55   <- right chunk
+  hit: sample-repo/com/example/util/FinePolicy.java:27-36
+  hit: sample-repo/com/example/util/FinePolicy.java:9-20
+  hit: sample-repo/com/example/core/Loan.java:41-43
+  hit: sample-repo/com/example/core/Loan.java:37-39
+  hit: sample-repo/com/example/core/Loan.java:33-35
+  hit: sample-repo/com/example/core/LoanRegistry.java:34-42
+  right chunk in top-8: yes (rank 2)
+
+=== Q: What happens when someone borrows a book whose ISBN is not in the catalogue?
+  hit: sample-repo/com/example/api/LibraryService.java:30-41   <- right chunk
+  hit: sample-repo/com/example/core/Book.java:6-66
+  hit: sample-repo/com/example/util/Catalog.java:23-25
+  hit: sample-repo/com/example/core/Book.java:27-29
+  hit: sample-repo/com/example/core/Book.java:47-55
+  hit: sample-repo/com/example/core/Book.java:57-60
+  hit: sample-repo/com/example/util/Catalog.java:11-55
+  hit: sample-repo/com/example/core/Book.java:62-65
+  right chunk in top-8: yes (rank 1)
+
+=== Q: How is the number of loans per genre computed for the committee report?
+  hit: sample-repo/com/example/api/ReportService.java:32-43   <- right chunk
+  hit: sample-repo/com/example/core/LoanRegistry.java:8-43
+  hit: sample-repo/com/example/core/Loan.java:6-55
+  hit: sample-repo/com/example/core/Member.java:41-49
+  hit: sample-repo/com/example/api/ReportService.java:11-44
+  hit: sample-repo/com/example/core/LoanRegistry.java:24-32
+  hit: sample-repo/com/example/core/LoanRegistry.java:16-18
+  hit: sample-repo/com/example/core/LoanRegistry.java:20-22
+  right chunk in top-8: yes (rank 1)
+
+=== Q: When are two Book objects considered equal?
+  hit: sample-repo/com/example/core/Book.java:47-55   <- right chunk
+  hit: sample-repo/com/example/core/Book.java:6-66
+  hit: sample-repo/com/example/core/Book.java:19-25
+  hit: sample-repo/com/example/util/Catalog.java:42-50
+  hit: sample-repo/com/example/util/Catalog.java:19-21
+  hit: sample-repo/com/example/api/LibraryService.java:30-41
+  hit: sample-repo/com/example/core/Member.java:51-53
+  hit: sample-repo/com/example/core/Book.java:27-29
+  right chunk in top-8: yes (rank 1)
+
+=== Q: How does the library send overdue reminder emails using Spring Boot's JavaMailSender?
+  hit: sample-repo/com/example/api/ReportService.java:28-30
+  hit: sample-repo/com/example/api/LibraryService.java:43-45
+  hit: sample-repo/com/example/core/Loan.java:41-43
+  hit: sample-repo/com/example/api/LibraryService.java:14-50
+  hit: sample-repo/com/example/api/LibraryService.java:47-49
+  hit: sample-repo/com/example/core/Loan.java:37-39
+  hit: sample-repo/com/example/api/LibraryService.java:24-28
+  hit: sample-repo/com/example/core/LoanRegistry.java:34-42
+
+Retrieval hit-rate @1: 5/10  @3: 9/10  @8: 10/10
+Mean retrieved context per question: 2410 chars
