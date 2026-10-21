@@ -7,6 +7,11 @@ model's tokenizer.  Every run is in `traces/`; each trace starts with a
 header (stop reason, LLM calls, tokens, the tool calls that actually ran)
 followed by the full transcript.
 
+**Build:** `src/OllamaLlm.java` needs langchain4j, so run `make langchain4j`
+(needs Maven) before `make test`; without it the build fails on that file.
+The tests themselves never call a model.  `make run Q="..."` needs Ollama
+with `llama3.2:3b` (`LLM=stub` to run without it).
+
 Ground truth for question A ("How many books did Ursula Le Guin write in
 the 1970s?"): **1** -- *The Dispossessed* (1974).  *The Left Hand of
 Darkness* (1969) sits just outside the range.
