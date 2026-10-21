@@ -1,0 +1,5 @@
+build/
+libs/
+coverage/
+jacoco.exec
+*.class

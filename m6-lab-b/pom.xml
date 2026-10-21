@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Dependency manifest used only by `make langchain4j`.
+  The regular `make build` / `make test` targets ignore this file and
+  compile straight with javac + libs/.  Maven is invoked solely to
+  download langchain4j (and its transitive dependencies) into libs/
+  with `mvn dependency:copy-dependencies`.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cs5013.handson</groupId>
+  <artifactId>m6-lab-b-deps</artifactId>
+  <version>0.0.1</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <langchain4j.version>0.36.0</langchain4j.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>dev.langchain4j</groupId>
+      <artifactId>langchain4j</artifactId>
+      <version>${langchain4j.version}</version>
+    </dependency>
+    <!-- Local embedding model: all-MiniLM-L6-v2, bundled, no network. -->
+    <dependency>
+      <groupId>dev.langchain4j</groupId>
+      <artifactId>langchain4j-embeddings-all-minilm-l6-v2</artifactId>
+      <version>${langchain4j.version}</version>
+    </dependency>
+    <!-- Chat model: Ollama (locally hosted; see handson6.tex). -->
+    <dependency>
+      <groupId>dev.langchain4j</groupId>
+      <artifactId>langchain4j-ollama</artifactId>
+      <version>${langchain4j.version}</version>
+    </dependency>
+  </dependencies>
+</project>
