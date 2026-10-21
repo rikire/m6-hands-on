@@ -1,0 +1,156 @@
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+embedder=all-MiniLM-L6-v2@langchain4j-0.36.0 llm=OllamaLlm chunker=method
+Indexed 51 chunk(s) from sample-repo in 633 ms
+
+=== Q: Where is the fine for an overdue loan computed?
+  hit: sample-repo/com/example/util/FinePolicy.java:9-20
+  hit: sample-repo/com/example/core/Loan.java:45-54
+  hit: sample-repo/com/example/core/LoanRegistry.java:34-42
+  hit: sample-repo/com/example/api/ReportService.java:28-30
+  hit: sample-repo/com/example/api/LibraryService.java:43-45
+  hit: sample-repo/com/example/util/FinePolicy.java:27-36   <- right chunk
+  hit: sample-repo/com/example/core/Loan.java:33-35
+  hit: sample-repo/com/example/core/Loan.java:37-39
+  right chunk in top-8: yes (rank 6)
+--- A (11 s): The fine for an overdue loan is computed in the `computeFine` method of the `FinePolicy` interface, specifically in the `StandardFinePolicy` class, which is located in the `sample-repo/com/example/util` package.
+
+=== Q: What class holds the catalogue of books, and how is it indexed?
+  hit: sample-repo/com/example/util/Catalog.java:11-55   <- right chunk
+  hit: sample-repo/com/example/core/Book.java:6-66
+  hit: sample-repo/com/example/util/Catalog.java:23-25
+  hit: sample-repo/com/example/api/LibraryService.java:47-49
+  hit: sample-repo/com/example/util/Catalog.java:19-21
+  hit: sample-repo/com/example/core/Book.java:27-29
+  hit: sample-repo/com/example/util/Catalog.java:27-40
+  hit: sample-repo/com/example/api/LibraryService.java:30-41
+  right chunk in top-8: yes (rank 1)
+--- A (6 s): The class that holds the catalogue of books is `Catalog`. 
+
+The catalogue is indexed by ISBN, which is used as the key in the `byIsbn` map. The `findByIsbn` method uses this index to retrieve a book by its ISBN. 
+
+The catalogue also supports a simple case-insensitive substring search over the book's title, which is implemented in the `searchByTitle` method. This method iterates over all books in the catalogue and checks if the title contains the search needle (case-insensitive).
+
+=== Q: How does the system decide a loan has been returned?
+  hit: sample-repo/com/example/core/Loan.java:45-54   <- right chunk
+  hit: sample-repo/com/example/core/Loan.java:37-39
+  hit: sample-repo/com/example/core/Loan.java:6-55
+  hit: sample-repo/com/example/core/Loan.java:33-35
+  hit: sample-repo/com/example/core/LoanRegistry.java:24-32
+  hit: sample-repo/com/example/core/LoanRegistry.java:8-43
+  hit: sample-repo/com/example/core/LoanRegistry.java:34-42
+  hit: sample-repo/com/example/core/LoanRegistry.java:16-18
+  right chunk in top-8: yes (rank 1)
+--- A (8 s): Based on the provided context, the system does not explicitly decide when a loan has been returned. However, it does provide a way to track whether a loan has been returned by checking the `returnedOn` field of the `Loan` object.
+
+A loan is considered returned when `returnedOn` is not null. This is indicated in the `isOverdue` method, where it returns `false` if `returnedOn` is not null, suggesting that the loan has been returned.
+
+To determine if a loan has been returned, you can check the `returnedOn` field of the `Loan` object. If it is not null, the loan is considered returned.
+
+=== Q: What is the maximum fine the policy allows?
+  hit: sample-repo/com/example/util/FinePolicy.java:9-20
+  hit: sample-repo/com/example/util/FinePolicy.java:27-36
+  hit: sample-repo/com/example/util/FinePolicy.java:22-37   <- right chunk
+  hit: sample-repo/com/example/api/LibraryService.java:43-45
+  hit: sample-repo/com/example/core/Member.java:41-49
+  hit: sample-repo/com/example/util/FinePolicy.java:17-19
+  hit: sample-repo/com/example/api/LibraryService.java:24-28
+  hit: sample-repo/com/example/core/Loan.java:6-55
+  right chunk in top-8: yes (rank 3)
+--- A (3 s): The maximum fine allowed by the policy is 500 rupees.
+
+=== Q: Which methods write to the loan registry?
+  hit: sample-repo/com/example/core/LoanRegistry.java:8-43
+  hit: sample-repo/com/example/core/LoanRegistry.java:16-18   <- right chunk
+  hit: sample-repo/com/example/api/ReportService.java:11-44
+  hit: sample-repo/com/example/core/LoanRegistry.java:34-42
+  hit: sample-repo/com/example/core/LoanRegistry.java:24-32
+  hit: sample-repo/com/example/core/Loan.java:6-55
+  hit: sample-repo/com/example/core/Loan.java:45-54
+  hit: sample-repo/com/example/core/LoanRegistry.java:20-22
+  right chunk in top-8: yes (rank 2)
+--- A (6 s): The methods that write to the loan registry are:
+
+1. `record(Loan loan)` in `LoanRegistry.java`: This method adds a new loan to the history list.
+2. `allLoans()` in `LoanRegistry.java`: Although this method returns an unmodifiable list, it is still considered a write operation because it updates the history list by returning a new, unmodifiable view of it.
+
+=== Q: How many books can a member have on loan at the same time?
+  hit: sample-repo/com/example/core/Loan.java:6-55
+  hit: sample-repo/com/example/core/Member.java:41-49   <- right chunk
+  hit: sample-repo/com/example/core/Book.java:6-66
+  hit: sample-repo/com/example/core/Loan.java:19-23
+  hit: sample-repo/com/example/api/LibraryService.java:30-41
+  hit: sample-repo/com/example/api/ReportService.java:32-43
+  hit: sample-repo/com/example/core/Loan.java:25-27
+  hit: sample-repo/com/example/core/LoanRegistry.java:24-32
+  right chunk in top-8: yes (rank 2)
+--- A (9 s): Unfortunately, the provided context is insufficient to determine the exact number of books a member can have on loan at the same time. The `Member` class has a method `addLoan(Loan loan)` that checks if the member has too many open loans, but it does not specify the maximum number of loans a member can have.
+
+The `Loan` class does not have a field or method that specifies the maximum number of loans a member can have. The `LibraryService` class has a method `borrow(String memberId, Member member, String isbn, LocalDate today)` that issues a loan, but it does not specify the maximum number of loans a member can have.
+
+Therefore, I cannot provide a definitive answer to this question based on the provided context.
+
+=== Q: How many days is the standard loan term?
+  hit: sample-repo/com/example/core/Loan.java:45-54
+  hit: sample-repo/com/example/core/Loan.java:6-55   <- right chunk
+  hit: sample-repo/com/example/util/FinePolicy.java:27-36
+  hit: sample-repo/com/example/util/FinePolicy.java:9-20
+  hit: sample-repo/com/example/core/Loan.java:41-43
+  hit: sample-repo/com/example/core/Loan.java:37-39
+  hit: sample-repo/com/example/core/Loan.java:33-35
+  hit: sample-repo/com/example/core/LoanRegistry.java:34-42
+  right chunk in top-8: yes (rank 2)
+--- A (3 s): The standard loan term is 21 days.
+
+=== Q: What happens when someone borrows a book whose ISBN is not in the catalogue?
+  hit: sample-repo/com/example/api/LibraryService.java:30-41   <- right chunk
+  hit: sample-repo/com/example/core/Book.java:6-66
+  hit: sample-repo/com/example/util/Catalog.java:23-25
+  hit: sample-repo/com/example/core/Book.java:27-29
+  hit: sample-repo/com/example/core/Book.java:47-55
+  hit: sample-repo/com/example/core/Book.java:57-60
+  hit: sample-repo/com/example/util/Catalog.java:11-55
+  hit: sample-repo/com/example/core/Book.java:62-65
+  right chunk in top-8: yes (rank 1)
+--- A (7 s): When someone borrows a book whose ISBN is not in the catalogue, an `IllegalArgumentException` is thrown with the message "unknown book: <ISBN>". This is because the `borrow` method in `LibraryService` class calls `findByIsbn` on the `Catalog` class, which returns an `Optional` containing the book if found, or an empty `Optional` if not found. The `orElseThrow` method is then used to throw an exception if the book is not found.
+
+=== Q: How is the number of loans per genre computed for the committee report?
+  hit: sample-repo/com/example/api/ReportService.java:32-43   <- right chunk
+  hit: sample-repo/com/example/core/LoanRegistry.java:8-43
+  hit: sample-repo/com/example/core/Loan.java:6-55
+  hit: sample-repo/com/example/core/Member.java:41-49
+  hit: sample-repo/com/example/api/ReportService.java:11-44
+  hit: sample-repo/com/example/core/LoanRegistry.java:24-32
+  hit: sample-repo/com/example/core/LoanRegistry.java:16-18
+  hit: sample-repo/com/example/core/LoanRegistry.java:20-22
+  right chunk in top-8: yes (rank 1)
+--- A (6 s): The number of loans per genre is computed in the `loansByGenre()` method of the `ReportService` class. This method iterates over all loans in the registry, extracts the genre of each loan, and uses the `merge()` method of the `HashMap` to increment the count for that genre. The method returns a `Map` where the keys are the genres and the values are the corresponding counts.
+
+=== Q: When are two Book objects considered equal?
+  hit: sample-repo/com/example/core/Book.java:47-55   <- right chunk
+  hit: sample-repo/com/example/core/Book.java:6-66
+  hit: sample-repo/com/example/core/Book.java:19-25
+  hit: sample-repo/com/example/util/Catalog.java:42-50
+  hit: sample-repo/com/example/util/Catalog.java:19-21
+  hit: sample-repo/com/example/api/LibraryService.java:30-41
+  hit: sample-repo/com/example/core/Member.java:51-53
+  hit: sample-repo/com/example/core/Book.java:27-29
+  right chunk in top-8: yes (rank 1)
+--- A (5 s): Two Book objects are considered equal if they share the same ISBN. This is determined by the `equals` method in the `Book` class, which checks if the `isbn` field of the current object is equal to the `isbn` field of the `other` object.
+
+=== Q: How does the library send overdue reminder emails using Spring Boot's JavaMailSender?
+  hit: sample-repo/com/example/api/ReportService.java:28-30
+  hit: sample-repo/com/example/api/LibraryService.java:43-45
+  hit: sample-repo/com/example/core/Loan.java:41-43
+  hit: sample-repo/com/example/api/LibraryService.java:14-50
+  hit: sample-repo/com/example/api/LibraryService.java:47-49
+  hit: sample-repo/com/example/core/Loan.java:37-39
+  hit: sample-repo/com/example/api/LibraryService.java:24-28
+  hit: sample-repo/com/example/core/LoanRegistry.java:34-42
+--- A (6 s): Unfortunately, the provided context is insufficient to answer the question about sending overdue reminder emails using Spring Boot's JavaMailSender.
+
+The context only provides information about the classes and methods related to the library's functionality, but it does not mention the JavaMailSender or any email-related functionality. To answer the question, additional context such as the JavaMailSender configuration, the email template, or the code that actually sends the emails would be necessary.
+
+Retrieval hit-rate @1: 5/10  @3: 9/10  @8: 10/10
+Mean retrieved context per question: 2410 chars

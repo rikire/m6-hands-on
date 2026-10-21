@@ -1,0 +1,13 @@
+Indexed 8 chunk(s) from sample-repo in 26 ms
+
+=== Q: Where is the fine for an overdue loan computed?
+  hit: sample-repo/com/example/util/FinePolicy.java:1-37
+  hit: sample-repo/com/example/util/Catalog.java:1-55
+  hit: sample-repo/com/example/core/Member.java:1-54
+  hit: sample-repo/com/example/core/LoanRegistry.java:1-43
+  hit: sample-repo/com/example/core/Loan.java:1-55
+  hit: sample-repo/com/example/core/Book.java:1-66
+  hit: sample-repo/com/example/api/ReportService.java:1-44
+  hit: sample-repo/com/example/api/LibraryService.java:1-50
+--- A: STUB RESPONSE for: You are a code-search assistant answering question
+
